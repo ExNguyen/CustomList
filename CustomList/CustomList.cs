@@ -16,18 +16,60 @@ namespace CustomList
         //Constructor
         public CustomList()
         {
-            capacity = 0;
-            count = 4;
+            capacity = 4;
+            count = 0;
+            //An items array with a number of places equal to the capacity
             items = new T[capacity];
         }
 
         //Member Methods (CAN DO)
+        public T this[int index]
+        {
+            get
+            {
+                if (index < 0 || index >= count)
+                {
+                    throw new IndexOutOfRangeException("Index is out of range.");
+                }
+                return items[index];
+            }
+        }
+        public int Count
+        {
+            get
+            {
+                return count;
+            }
+        }
+
+        public int Capacity
+        {
+            get
+            {
+                return capacity;
+            }
+        }
+
         public void Add(T item)
         {
             //'item' parameter should be added to internal 'items' array
             //if items array is at capacity, double capacity and create new array
             //transfer all items to new array
+            if (count == capacity)
+            {
+                capacity *= 2;
+                T[] newItemArray = new T[capacity];
+                for (int i = 0; i < count; i++)
+                {
+                    newItemArray[i] = items[i];
+                }
+                items = newItemArray;
+            }
+
+            items[count] = item;
+            count++;
         }
+    
 
         public bool Remove(T item)
         {

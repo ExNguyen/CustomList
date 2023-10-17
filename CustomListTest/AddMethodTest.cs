@@ -14,6 +14,10 @@ public class AddMethodTest
         //Act
         myList.Add("hello");
         myList.Add("world");
+        myList.Add("good-bye");
+        myList.Add("world");
+        myList.Add("good");
+        myList.Add("eveneing");
 
         //Assert
         Assert.AreEqual("world", myList[1]);
