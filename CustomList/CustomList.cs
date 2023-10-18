@@ -106,7 +106,7 @@ namespace CustomList
         {
             //returns a single string that contains all items from array
             StringBuilder sb = new StringBuilder();
-            sb.Append("[");
+            sb.Append("");
 
             for (int i = 0; i < count; i++)
             {
@@ -117,7 +117,7 @@ namespace CustomList
                 }
             }
 
-            sb.Append("]");
+            sb.Append("");
 
             return sb.ToString();
         }
@@ -157,6 +157,41 @@ namespace CustomList
             return result;
         }
 
+        public CustomList<T> Zip(CustomList<T> otherList)
+        {
+            CustomList<T> result = new CustomList<T>();
+
+            int minLength = Math.Min(count, otherList.Count);
+
+            for (int i = 0; i < minLength; i++)
+            {
+                result.Add(this[i]);
+                result.Add(otherList[i]);
+            }
+
+            for (int i = minLength; i < count; i++)
+            {
+                result.Add(this[i]);
+            }
+
+            for (int i = minLength; i < otherList.Count; i++)
+            {
+                result.Add(otherList[i]);
+            }
+
+            return result;
+        }
+
+        public void Sort()
+        {
+            //Instead of using the Reverse() method I created my own that should still follow the same concept
+            for (int i = 0; i < count / 2; i++)
+            {
+                T temp = items[i];
+                items[i] = items[count - 1 - i];
+                items[count - 1 - i] = temp;
+            }
+        }
 
     }
 }
