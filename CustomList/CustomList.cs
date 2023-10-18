@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -76,25 +77,84 @@ namespace CustomList
             //If 'item' exists in the 'items' array, remove its first instance
             //Any items coming after the removed item should be shifted down so there is no empty index.
             //If 'item' was removed, return true. If no item was removed, return false.
-            return false;
+            int index = -1;
+
+            for (int i = 0; i < count; i++)
+            {
+                if (items[i].Equals(item))
+                {
+                    index = i;
+                    break;
+                }
+            }
+
+            if (index != -1)
+            {
+                for (int i = index; i < count - 1; i++)
+                {
+                    items[i] = items[i + 1];
+                }
+
+                items[count - 1] = default(T);
+                count--;
+                return true;
+            }
+            return false;           
         }
 
         public override string ToString()
         {
             //returns a single string that contains all items from array
-            return "";
+            StringBuilder sb = new StringBuilder();
+            sb.Append("[");
+
+            for (int i = 0; i < count; i++)
+            {
+                sb.Append(items[i]);
+                if (i < count - 1)
+                {
+                    sb.Append(", ");
+                }
+            }
+
+            sb.Append("]");
+
+            return sb.ToString();
         }
 
         public static CustomList<T> operator +(CustomList<T> firstList, CustomList<T> secondList)
         {
             //returns a single CustomList<T> that contains all items from firstList and all items from secondList 
-            return null;
+            CustomList<T> result = new CustomList<T>();
+
+
+            for (int i = 0; i < firstList.count; i++)
+            {
+                result.Add(firstList[i]);
+            }
+
+            for (int i = 0; i < secondList.count; i++)
+            {
+                result.Add(secondList[i]);
+            }
+
+            return result;
         }
 
         public static CustomList<T> operator -(CustomList<T> firstList, CustomList<T> secondList)
         {
             //returns a single CustomList<T> with all items from firstList, EXCEPT any items that also appear in secondList
-            return null;
+            CustomList<T> result = new CustomList<T>();
+
+            for (int i = 0; i < firstList.count; i++)
+            {
+                if (!secondList.Equals(firstList[i]))
+                {
+                    result.Add(firstList[i]);
+                }
+            }
+            
+            return result;
         }
 
 
