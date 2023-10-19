@@ -6,7 +6,7 @@ namespace CustomListTest
     public class PlusOperatorOverideTest
     {
         [TestMethod]
-        public void PlusOperatorOverideTest_ListLength_FirstListLongerThenSecondList()
+        public void PlusOperatorMethod_ListLength_FirstListLongerThenSecondList()
         {
             //Arrange
             CustomList<int> list1 = new CustomList<int>();
