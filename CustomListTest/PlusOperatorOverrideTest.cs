@@ -6,7 +6,7 @@ namespace CustomListTest
     public class PlusOperatorOverideTest
     {
         [TestMethod]
-        public void PlusOperatorMethod_ListLength_FirstListLongerThenSecondList()
+        public void PlusOperatorMethod_CombinedList_FirstListLongerThenSecondList()
         {
             //Arrange
             CustomList<int> list1 = new CustomList<int>();
@@ -30,7 +30,7 @@ namespace CustomListTest
         }
 
         [TestMethod]
-        public void PlusOperatorMethod_ListLength_SecondListLongerThenFirstList()
+        public void PlusOperatorMethod_CombinedList_SecondListLongerThenFirstList()
         {
             //Arrange
             CustomList<int> list1 = new CustomList<int>();
@@ -61,14 +61,14 @@ namespace CustomListTest
 
             //Act
             list1.Add(1);
-            list1.Add(2)
+            list1.Add(2);
 
             CustomList<int> combinedList = list1 + list2;
 
             //Assert
             Assert.AreEqual(2, combinedList.Count);
             Assert.AreEqual(1, combinedList[0]);
-            Assert.AreEqual("", combinedList[3]);
+            
         }
     }
 }
