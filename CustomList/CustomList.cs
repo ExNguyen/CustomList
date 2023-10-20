@@ -51,6 +51,18 @@ namespace CustomList
             }
         }
 
+        public static bool Contains(T item, CustomList<T> list)
+        {
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (EqualityComparer<T>.Default.Equals(item, list[i]))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public void Add(T item)
         {
             //'item' parameter should be added to internal 'items' array
@@ -143,18 +155,40 @@ namespace CustomList
 
         public static CustomList<T> operator -(CustomList<T> firstList, CustomList<T> secondList)
         {
-            //returns a single CustomList<T> with all items from firstList, EXCEPT any items that also appear in secondList
+            //returns a single CustomList<T> with all items from firstList, EXCEPT any items that also appear in secondList and vise versa
             CustomList<T> result = new CustomList<T>();
 
-            for (int i = 0; i < firstList.count; i++)
+            if (firstList.Count > secondList.Count)
             {
-                if (!secondList.Equals(firstList[i]))
+                for (int i = 0; i < firstList.count; i++)
                 {
-                    result.Add(firstList[i]);
+                    T item = firstList[i];
+
+                    if (!Contains(item, secondList))
+                    {
+                        result.Add(item);
+                    }
                 }
             }
-            
+            else if (firstList.Count < secondList.Count)
+            {
+                for (int i = 0; i < secondList.count; i++)
+                {
+                    T item = secondList[i];
+
+                    if (!Contains(item, firstList))
+                    {
+                        result.Add(item);
+                    }
+                }
+            }
+                       
             return result;
+        }
+
+        private bool Contains(T? t)
+        {
+            throw new NotImplementedException();
         }
 
         public CustomList<T> Zip(CustomList<T> otherList)
@@ -193,5 +227,6 @@ namespace CustomList
             }
         }
 
+        
     }
 }
