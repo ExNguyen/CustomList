@@ -51,18 +51,6 @@ namespace CustomList
             }
         }
 
-        public static bool Contains(T item, CustomList<T> list)
-        {
-            for (int i = 0; i < list.Count; i++)
-            {
-                if (EqualityComparer<T>.Default.Equals(item, list[i]))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
         public void Add(T item)
         {
             //'item' parameter should be added to internal 'items' array
@@ -158,37 +146,29 @@ namespace CustomList
             //returns a single CustomList<T> with all items from firstList, EXCEPT any items that also appear in secondList and vise versa
             CustomList<T> result = new CustomList<T>();
 
-            if (firstList.Count > secondList.Count)
+            for (int i = 0; i < firstList.Count; i++)
             {
-                for (int i = 0; i < firstList.count; i++)
-                {
-                    T item = firstList[i];
+                if (firstList[i].Equals(secondList[i])) { }
 
-                    if (!Contains(item, secondList))
-                    {
-                        result.Add(item);
-                    }
+                else if (!firstList[i].Equals(secondList[i]))
+                {
+                    result.Add(firstList[i]);
                 }
             }
-            else if (firstList.Count < secondList.Count)
-            {
-                for (int i = 0; i < secondList.count; i++)
-                {
-                    T item = secondList[i];
 
-                    if (!Contains(item, firstList))
-                    {
-                        result.Add(item);
-                    }
+
+
+            for (int i = 0; i < secondList.count; i++)
+            {
+                if (firstList[i].Equals(secondList[i]))
+                {
+                    result.Add(secondList[i]);
                 }
             }
-                       
+
+
+
             return result;
-        }
-
-        private bool Contains(T? t)
-        {
-            throw new NotImplementedException();
         }
 
         public CustomList<T> Zip(CustomList<T> otherList)
