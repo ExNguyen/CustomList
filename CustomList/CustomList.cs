@@ -143,17 +143,31 @@ namespace CustomList
 
         public static CustomList<T> operator -(CustomList<T> firstList, CustomList<T> secondList)
         {
-            //returns a single CustomList<T> with all items from firstList, EXCEPT any items that also appear in secondList
+            //returns a single CustomList<T> with all items from firstList, EXCEPT any items that also appear in secondList and vise versa
             CustomList<T> result = new CustomList<T>();
 
-            for (int i = 0; i < firstList.count; i++)
+            for (int i = 0; i < firstList.Count; i++)
             {
-                if (!secondList.Equals(firstList[i]))
+                if (firstList[i].Equals(secondList[i])) { }
+
+                else if (!firstList[i].Equals(secondList[i]))
                 {
                     result.Add(firstList[i]);
                 }
             }
-            
+
+
+
+            for (int i = 0; i < secondList.count; i++)
+            {
+                if (firstList[i].Equals(secondList[i]))
+                {
+                    result.Add(secondList[i]);
+                }
+            }
+
+
+
             return result;
         }
 
@@ -193,5 +207,6 @@ namespace CustomList
             }
         }
 
+        
     }
 }
