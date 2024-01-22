@@ -61,14 +61,14 @@ namespace CustomListTest
 
             //Act
             list1.Add(1);
-            list1.Add(2)
+            list1.Add(2);
 
             CustomList<int> combinedList = list1 + list2;
 
             //Assert
             Assert.AreEqual(2, combinedList.Count);
             Assert.AreEqual(1, combinedList[0]);
-            Assert.AreEqual("", combinedList[3]);
+            //Assert.AreEqual("", combinedList[3]);
         }
     }
 }
